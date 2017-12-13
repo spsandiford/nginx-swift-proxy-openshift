@@ -3,7 +3,7 @@ location /${OBJECT_STORE_DIR} {
     auth_request /auth;
     auth_request_set ${DOLLAR}token ${DOLLAR}upstream_http_x_auth_token;
     proxy_set_header X-Auth-Token ${DOLLAR}token;
-    rewrite /(.*)$ ${ISILON_OBJECT_STORE_DIR}/${DOLLAR}1 break;
+    rewrite /${OBJECT_STORE_DIR}/(.*)$ ${ISILON_OBJECT_STORE_DIR}/${DOLLAR}1 break;
     proxy_pass ${ISILON_ROOT_URL};
     limit_except GET {
         deny  all;
