@@ -29,7 +29,5 @@ if [ -d ./nginx-default-cfg ]; then
   rm -rf ./nginx-default-cfg
 fi
 
-echo "---> This is the custom step"
-
 # Fix source directory permissions
 fix-permissions ./
