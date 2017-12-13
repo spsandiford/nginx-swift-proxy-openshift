@@ -1,0 +1,11 @@
+location /${OBJECT_STORE_DIR} {
+    client_body_in_file_only on;
+    auth_request /auth;
+    auth_request_set $token $upstream_http_x_auth_token;
+    proxy_set_header X-Auth-Token $token;
+    rewrite /(.*)$ ${ISILON_OBJECT_STORE_DIR}/$1 break;
+    proxy_pass ${ISILON_ROOT_URL};
+    limit_except GET {
+        deny  all;
+    }
+}

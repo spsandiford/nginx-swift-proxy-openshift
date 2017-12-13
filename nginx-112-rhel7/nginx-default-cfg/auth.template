@@ -1,0 +1,5 @@
+location = /auth {
+    proxy_set_header X-Auth-User ${ISILON_SWIFT_X_AUTH_USER};
+    proxy_set_header X-Auth-Key ${ISILON_SWIFT_X_AUTH_KEY};
+    proxy_pass ${ISILON_AUTH_URL};
+}
