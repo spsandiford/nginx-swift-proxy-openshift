@@ -9,16 +9,24 @@ if [ -d ./nginx-cfg ]; then
   echo "---> Copying nginx configuration files..."
   if [ "$(ls -A ./nginx-cfg/*.conf)" ]; then
     cp -v ./nginx-cfg/*.conf "${NGINX_CONFIGURATION_PATH}"
-    rm -rf ./nginx-cfg
   fi
+  echo "---> Copying nginx template configuration files..."
+  if [ "$(ls -A ./nginx-cfg/*.template)" ]; then
+    cp -v ./nginx-cfg/*.template "${NGINX_CONFIGURATION_PATH}"
+  fi
+  rm -rf ./nginx-cfg
 fi
 
 if [ -d ./nginx-default-cfg ]; then
   echo "---> Copying nginx default server configuration files..."
   if [ "$(ls -A ./nginx-default-cfg/*.conf)" ]; then
     cp -v ./nginx-default-cfg/*.conf "${NGINX_DEFAULT_CONF_PATH}"
-    rm -rf ./nginx-default-cfg
   fi
+  echo "---> Copying nginx default server template configuration files..."
+  if [ "$(ls -A ./nginx-default-cfg/*.template)" ]; then
+    cp -v ./nginx-default-cfg/*.template "${NGINX_DEFAULT_CONF_PATH}"
+  fi
+  rm -rf ./nginx-default-cfg
 fi
 
 echo "---> This is the custom step"
