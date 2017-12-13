@@ -4,4 +4,14 @@ source /opt/app-root/etc/generate_container_user
 
 set -e
 
+DEFAULT_CONF_DIR="/opt/app-root/etc/nginx.default.d"
+export DOLLAR='$'
+
+for TEMPLATE_FILE in $(ls ${DEFAULT_CONF_DIR}/*.template)
+do
+    TEMPLATE_BASE_NAME=`basename --suffix=.template ${TEMPLATE_FILE}`
+    echo "Processing template file" $TEMPLATE_FILE
+    envsubst < $TEMPLATE_FILE > ${DEFAULT_CONF_DIR}/${TEMPLATE_BASE_NAME}.conf
+done
+
 exec nginx -g "daemon off;"
